@@ -1,10 +1,20 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 
-# Create your views here.
+from accountapp.models import NewModel
 
-def hello_world(request) :
-    if request.method == 'POST' :
-        return render(request, 'accountsapp/hello_world.html', context={'text': 'POST METHOD!'})
+
+def hello_world(request):
+    if request.method == 'POST':
+
+        temp = request.POST.get('input_text')
+
+        model_instance = NewModel()
+        model_instance.text = temp
+        model_instance.save()
+
+        return HttpResponseRedirect(reverse('accountapp:hello_world'))
     else :
-        return render(request, 'accountsapp/hello_world.html', context={'text': 'POST METHOD!'})
+        data_list = NewModel.objects.all()
+        return render(request, 'accountsapp/hello_world.html', context={'data_list': data_list})
