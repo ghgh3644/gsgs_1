@@ -1,6 +1,6 @@
 <div style="text-align: center">
     <div class="GeonheeWorld_header_logo">
-        <h1>Geonhee World</h1>
+        <h1>GeonheeWorld</h1>
     </div>
     <div class="GeonheeWorld_header_button">
         <span>nav1</span>
@@ -18,6 +18,11 @@
         </span>
         {% else %}
         <span>
+            <a href="{% url 'accountapp:detail' pk=user.pk %}">
+                MyPage
+            </a>
+        </span>
+                <span>
             <a href="{% url 'accountapp:logout' %}">
                 Logout
             </a>
